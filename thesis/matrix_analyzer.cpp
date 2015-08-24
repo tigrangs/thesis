@@ -19,15 +19,13 @@ analyzed_data matrix_analyzer::analyze(const matrix *m, const unsigned sub_matri
     analyzed_data data(m, sub_matrixes_size);
     for (unsigned i = 0; i < m->get_height() - sub_matrixes_size; ++i) {
         for (unsigned j = 0; j < m->get_width() - sub_matrixes_size; ++j) {
-            int max_val = 0;
+            int sum_val = 0;
             for (unsigned k = i ; k < i + sub_matrixes_size; ++k) {
                 for (unsigned p = j; p < j + sub_matrixes_size; ++p) {
-                    if (max_val < m->get_value(k, p)) {
-                        max_val = m->get_value(k, p);
-                    }
+                        sum_val += m->get_value(k, p);
                 }
             }
-            data.add_data(j, i, j + sub_matrixes_size - 1, i + sub_matrixes_size - 1, max_val);
+            data.add_data(j, i, j + sub_matrixes_size - 1, i + sub_matrixes_size - 1, sum_val);
         }
     }
     return data;
