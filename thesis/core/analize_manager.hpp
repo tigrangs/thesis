@@ -3,7 +3,7 @@
 
 #include "analyzed_data.hpp"
 
-#include <list>
+#include <vector>
 
 class analize_manager
 {
@@ -26,7 +26,7 @@ public:
     void run();
 
 public:
-    typedef std::list<analyzed_data> data;
+    typedef std::vector<analyzed_data> data;
 
     const data& get_analized_data() const;
 
