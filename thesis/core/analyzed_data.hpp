@@ -24,6 +24,10 @@ public:
 public:
     int get_data(unsigned, unsigned, unsigned, unsigned) const;
 
+public:
+    void set_max_data(unsigned, unsigned, unsigned, unsigned, int);
+    void get_max_data(unsigned&, unsigned&, unsigned&, unsigned&, int&) const;
+
 private:
     struct coordinates
     {
@@ -41,6 +45,8 @@ private:
     const matrix* m_matrix;
     unsigned m_step;
     std::map<coordinates, int> m_data;
+    int m_max_value;
+    coordinates m_max_data_coordinates;
 };
 
 #endif // ANALYZED_DATA_HPP

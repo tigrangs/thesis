@@ -3,7 +3,7 @@
 
 #include <QAbstractTableModel>
 
-#include "../core/matrix.hpp"
+#include "../core/analyzed_data.hpp"
 
 class matrix_model : public QAbstractTableModel
 {
@@ -12,7 +12,7 @@ public:
     explicit matrix_model(QObject *parent = 0);
 
 public:
-    void set_matrix(const matrix* m);
+    void set_data(const analyzed_data& m);
 
 public:
     virtual int columnCount(const QModelIndex & = QModelIndex()) const;
@@ -21,7 +21,7 @@ public:
     virtual int rowCount(const QModelIndex & = QModelIndex()) const;
 
 private:
-    const matrix* m_matrix;
+    analyzed_data m_data;
 };
 
 #endif // MATRIX_MODEL_H

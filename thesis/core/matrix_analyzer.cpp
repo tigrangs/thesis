@@ -17,6 +17,8 @@ analyzed_data matrix_analyzer::analyze(const matrix *m, const unsigned sub_matri
 {
     assert(m != 0);
     analyzed_data data(m, sub_matrixes_size);
+    int max_val = 0;
+    unsigned tx = 0, ty = 0, bx = 0, by = 0;
     for (unsigned i = 0; i < m->get_height() - sub_matrixes_size; ++i) {
         for (unsigned j = 0; j < m->get_width() - sub_matrixes_size; ++j) {
             int sum_val = 0;
@@ -26,7 +28,15 @@ analyzed_data matrix_analyzer::analyze(const matrix *m, const unsigned sub_matri
                 }
             }
             data.add_data(j, i, j + sub_matrixes_size - 1, i + sub_matrixes_size - 1, sum_val);
+            if (sum_val > max_val) {
+                max_val = sum_val;
+                ty = i;
+                tx = j;
+                by = i + sub_matrixes_size - 1;
+                bx = j + sub_matrixes_size - 1;
+            }
         }
     }
+    data.set_max_data(tx, ty, bx, by, max_val);
     return data;
 }

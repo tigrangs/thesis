@@ -105,7 +105,7 @@ void main_window::run_analize()
     assert(m_view != 0);
     matrix_model* m = new matrix_model(m_view);
     m_model = m;
-    m->set_matrix(&(*(am->get_analized_data().begin())->get_matrix()));
+    m->set_data(*(am->get_analized_data().begin()));
     m_view->setModel(m);
     assert(m_matrix_id != 0);
     m_matrix_id->setVisible(true);
@@ -116,7 +116,7 @@ void main_window::change_current_matrix(QString d)
     typedef analize_manager AM;
     AM* am = AM::get_instance();
     if (d.toInt() < get_number(m_matrix_number))
-    m_model->set_matrix((am->get_analized_data())[d.toInt()].get_matrix());
+    m_model->set_data((am->get_analized_data())[d.toInt()]);
 }
 
 void main_window::clear()

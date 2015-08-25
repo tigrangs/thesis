@@ -8,8 +8,10 @@
 analyzed_data::analyzed_data(const matrix *m, unsigned step)
     : m_matrix(m)
     , m_step(step)
+    , m_max_data_coordinates({0,0,0,0})
+    , m_max_value(0)
 {
-    assert(m != 0);
+//    assert(m != 0);
 }
 
 analyzed_data::analyzed_data(const analyzed_data & d)
@@ -18,6 +20,8 @@ analyzed_data::analyzed_data(const analyzed_data & d)
     m_matrix = d.m_matrix;
     m_data = d.m_data;
     m_step = d.m_step;
+    m_max_data_coordinates = d.m_max_data_coordinates;
+    m_max_value = d.m_max_value;
 }
 
 analyzed_data& analyzed_data::operator=(const analyzed_data& d)
@@ -26,6 +30,8 @@ analyzed_data& analyzed_data::operator=(const analyzed_data& d)
     m_matrix = d.m_matrix;
     m_data = d.m_data;
     m_step = d.m_step;
+    m_max_data_coordinates = d.m_max_data_coordinates;
+    m_max_value = d.m_max_value;
     return *this;
 }
 
@@ -65,6 +71,21 @@ int analyzed_data::get_data(unsigned tx, unsigned ty, unsigned bx, unsigned by) 
     assert(by < m_matrix->get_height());
     coordinates c = {tx, ty, bx, by};
     return m_data.at(c);
+}
+
+void analyzed_data::set_max_data(unsigned tx, unsigned ty, unsigned bx, unsigned by, int max_val)
+{
+    m_max_data_coordinates = {tx, ty, bx, by};
+    m_max_value = max_val;
+}
+
+void analyzed_data::get_max_data(unsigned & tx, unsigned & ty, unsigned & bx, unsigned & by, int & max_val) const
+{
+    tx = m_max_data_coordinates.m_top_left_x;
+    ty = m_max_data_coordinates.m_top_left_y;
+    bx = m_max_data_coordinates.m_bottom_right_x;
+    by = m_max_data_coordinates.m_bottom_right_y;
+    max_val = m_max_value;
 }
 
 void analyzed_data::print() const
