@@ -31,6 +31,7 @@ private:
     QLineEdit* m_data_end;
     QLineEdit* m_matrix_number;
     QWidget* m_matrix_id;
+    QComboBox* m_matrix_combo;
     matrix_model* m_model;
 };
 

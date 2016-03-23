@@ -11,6 +11,7 @@
 #include <QPushButton>
 #include <QIntValidator>
 #include <QHeaderView>
+#include <QStringList>
 
 #include <cassert>
 
@@ -24,6 +25,7 @@ main_window::main_window(QWidget *parent)
     , m_matrix_number(0)
     , m_matrix_id(0)
     , m_model(0)
+    , m_matrix_combo(0)
 {
     init();
 }
@@ -74,6 +76,7 @@ void main_window::init()
     matrix_id->setEditable(true);
     matrix_id->setValidator(new QIntValidator(m_matrix_id));
     l->addWidget(matrix_id);
+    m_matrix_combo = matrix_id;
     l->setMargin(0);
     layout->addWidget(m_matrix_id, 6, 0, 1, 3);
     m_matrix_id->setVisible(false);
@@ -109,6 +112,12 @@ void main_window::run_analize()
     m_view->setModel(m);
     assert(m_matrix_id != 0);
     m_matrix_id->setVisible(true);
+    QStringList l;
+    int max_num = get_number(m_matrix_number);
+    for (int i = 0; i < max_num; ++i) {
+        l.push_back(QString::number(i));
+    }
+    m_matrix_combo->insertItems(0, l);
 }
 
 void main_window::change_current_matrix(QString d)
