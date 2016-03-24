@@ -22,6 +22,7 @@ private slots:
     void run_analize();
     void clear();
     void change_current_matrix(QString);
+    void change_mode(int);
 
 private:
     QTableView* m_view;
@@ -32,6 +33,7 @@ private:
     QLineEdit* m_matrix_number;
     QWidget* m_matrix_id;
     QComboBox* m_matrix_combo;
+    QComboBox* m_mode;
     matrix_model* m_model;
 };
 

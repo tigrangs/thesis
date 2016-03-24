@@ -24,8 +24,9 @@ main_window::main_window(QWidget *parent)
     , m_data_end(0)
     , m_matrix_number(0)
     , m_matrix_id(0)
-    , m_model(0)
     , m_matrix_combo(0)
+    , m_mode(0)
+    , m_model(0)
 {
     init();
 }
@@ -80,6 +81,12 @@ void main_window::init()
     l->setMargin(0);
     layout->addWidget(m_matrix_id, 6, 0, 1, 3);
     m_matrix_id->setVisible(false);
+    m_mode = new QComboBox(c_widget);
+    m_mode->addItem(QString("Sorted"));
+    m_mode->addItem(QString("Evenly destributed"));
+    connect(m_mode, SIGNAL(currentIndexChanged(int)), this, SLOT(change_mode(int)));
+    m_mode->setCurrentIndex(0);
+    layout->addWidget(m_mode, 2, 2);
     QDockWidget* dock_widget = new QDockWidget("Options", this);
     dock_widget->setWidget(c_widget);
     addDockWidget(Qt::TopDockWidgetArea, dock_widget);
@@ -88,6 +95,14 @@ void main_window::init()
     m_data_begin = data_begin;
     m_data_end = data_end;
     m_matrix_number = matrix_number;
+}
+
+void main_window::change_mode(int index)
+{
+    assert(index != -1);
+    typedef analize_manager AM;
+    AM* am = AM::get_instance();
+    am->set_mode(static_cast<analize_manager::mode>(index));
 }
 
 int get_number(const QLineEdit* e)

@@ -1,10 +1,15 @@
 #include "evenly_destributed.hpp"
+#include "rundom_number_generator.hpp"
+
+#include <algorithm>
+#include <cassert>
+#include <vector>
 
 evenly_destributed::evenly_destributed(unsigned size)
     : matrix(size, size)
 {}
 
-void evenly_destributed::fill(int size, int begin, int end)
+void evenly_destributed::fill(unsigned size, int begin, int end)
 {
     assert(size < get_width());
     assert(begin < end);
@@ -35,7 +40,7 @@ void evenly_destributed::fill_matrix(ints &numbers)
             if (by > get_height()) {
                 by = get_height();
             }
-            fill_parts(i, j, bx, by, numbers, data_begin);
+            fill_parts(i, j, bx, by, numbers, data_begin / 2);
             data_begin += (bx - i)  * (by - j); // TODO
         }
     }
@@ -45,11 +50,17 @@ void evenly_destributed::fill_parts(unsigned top_left_x, unsigned top_left_y,
                                unsigned bottom_right_x, unsigned bottom_right_y,
                                const std::vector<int> & data, unsigned begin)
 {
-    unsigned count = 0; // TODO colculate real values
+    unsigned b_count = 0, e_count = 0; // TODO colculate real values
+    bool is_from_begin = true;
     for (unsigned j = top_left_y; j < bottom_right_y; ++j) {
         for (unsigned i = top_left_x; i < bottom_right_x; ++i) {
-            set_value(i, j, data[begin + count]);
-            ++count;
+            set_value(i, j, is_from_begin ? data[begin + b_count] : data[data.size() - 1 - begin - e_count]);
+            if (is_from_begin) {
+                ++b_count;
+            } else {
+                ++e_count;
+            }
+            is_from_begin = !is_from_begin;
         }
     }
 }

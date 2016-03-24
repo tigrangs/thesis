@@ -8,6 +8,15 @@
 class analize_manager
 {
 public:
+    enum mode {
+        sorted = 0,
+        evenly = 1
+    };
+
+public:
+    void set_mode(mode m);
+
+public:
     static analize_manager* get_instance();
 
 public:
@@ -31,6 +40,10 @@ public:
     const data& get_analized_data() const;
 
 private:
+    matrix* create_sorted_matrix();
+    matrix* create_evenly_matrix();
+
+private:
     analize_manager();
     analize_manager(const analize_manager&);
     analize_manager& operator=(const analize_manager &);
@@ -41,6 +54,7 @@ private:
     std::pair<unsigned,unsigned> m_matrix_size;
     std::pair<int, int> m_value_range;
     data m_data;
+    mode m_mode;
 };
 
 #endif // ANALIZE_MANAGER_HPP

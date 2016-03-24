@@ -48,6 +48,14 @@ QVariant matrix_model::data(const QModelIndex &index, int role) const
             return QVariant(QColor(Qt::red));
         }
     }
+    if (role == Qt::ToolTipRole) {
+        int max_value = 0;
+        unsigned tx = 0, ty = 0, bx = 0, by = 0;
+        m_data.get_max_data(tx, ty, bx, by, max_value);
+        if (index.row() - 1 <= by && index.row() - 1 >= ty && index.column() - 1 <= bx && index.column() - 1 >= tx) {
+            return QVariant(max_value);
+        }
+    }
     return QVariant();
 }
 
