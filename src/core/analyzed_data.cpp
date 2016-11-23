@@ -8,8 +8,8 @@
 analyzed_data::analyzed_data(const matrix *m, unsigned step)
     : m_matrix(m)
     , m_step(step)
-    , m_max_data_coordinates({0,0,0,0})
     , m_max_value(0)
+    , m_max_data_coordinates({0,0,0,0})
 {
 //    assert(m != 0);
 }

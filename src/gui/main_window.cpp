@@ -84,6 +84,7 @@ void main_window::init()
     m_mode = new QComboBox(c_widget);
     m_mode->addItem(QString("Sorted"));
     m_mode->addItem(QString("Evenly destributed"));
+    m_mode->addItem(QString("Better destributed"));
     connect(m_mode, SIGNAL(currentIndexChanged(int)), this, SLOT(change_mode(int)));
     m_mode->setCurrentIndex(0);
     layout->addWidget(m_mode, 2, 2);

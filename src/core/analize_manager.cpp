@@ -3,6 +3,7 @@
 #include "evenly_destributed.hpp"
 #include "sorted_matrix.hpp"
 #include "matrix_analyzer.hpp"
+#include "better_aprox_matix.hpp"
 
 #include <iostream>
 #include <cassert>
@@ -64,6 +65,15 @@ matrix* analize_manager::create_evenly_matrix()
     return m;
 }
 
+matrix* analize_manager::create_better_aprox_matrix()
+{
+    better_aprox_matrix* m = new better_aprox_matrix(m_matrix_size.first);
+    m->fill(m_internal_matrix_size,
+            m_value_range.first, m_value_range.second);
+    return m;
+
+}
+
 void analize_manager::run()
 {
     m_data.clear();
@@ -75,6 +85,9 @@ void analize_manager::run()
                 break;
             case evenly:
                 m = create_evenly_matrix();
+                break;
+            case better:
+                m = create_better_aprox_matrix();
                 break;
             default:
                 m = 0;

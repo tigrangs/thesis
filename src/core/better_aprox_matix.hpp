@@ -11,7 +11,7 @@ public:
     better_aprox_matrix(unsigned size);
 
 public:
-    void fill_with_sorting(unsigned size, int begin, int end);
+    void fill(unsigned size, int begin, int end);
 
 private:
     virtual void fill_matrix(ints&);
@@ -19,8 +19,12 @@ private:
 private:
     void fill_parts(unsigned top_left_x, unsigned top_left_y,
                     unsigned bottom_right_x, unsigned bottom_right_y,
-                    const std::vector<int>&, unsigned begin);
+                    const std::vector<int>&);
 
+private:
+    void fill_single_matrix(unsigned top_left_x, unsigned top_left_y,
+                            unsigned bottom_right_x, unsigned bottom_right_y,
+                            const std::vector<int>& data);
 private:
     unsigned m_internal_size;
 

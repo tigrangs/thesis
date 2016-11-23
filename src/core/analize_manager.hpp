@@ -10,7 +10,8 @@ class analize_manager
 public:
     enum mode {
         sorted = 0,
-        evenly = 1
+        evenly = 1,
+        better = 2
     };
 
 public:
@@ -42,6 +43,7 @@ public:
 private:
     matrix* create_sorted_matrix();
     matrix* create_evenly_matrix();
+    matrix* create_better_aprox_matrix();
 
 private:
     analize_manager();
